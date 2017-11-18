@@ -20,6 +20,14 @@ keyMap = {
     NOTE_5: 84
 }
 
+keyColorMap = {
+    NOTE_1: (0, 255, 0),
+    NOTE_2: (255, 0, 0),
+    NOTE_3: (255, 255, 0),
+    NOTE_4: (0, 0, 255),
+    NOTE_5: (255, 165, 0)
+}
+
 
 def removeAll(myList, val):
     return [value for value in myList if value != val]
@@ -123,7 +131,6 @@ def main():
                     activeNotes.remove(note)
                     print("hit note")
 
-
         # move notes down screen and remove them if they are missed
         for note in activeNotes:
             note.top += 3
@@ -131,9 +138,8 @@ def main():
                 activeNotes.remove(note)
                 print("Note missed")
             else:
-                pygame.draw.rect(screen, (100, 100, 100), note)
+                pygame.draw.rect(screen, keyColorMap[note.left], note)
 
-        # print("tick")
         # # update the screen
         pygame.display.flip()
 
