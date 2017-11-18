@@ -11,13 +11,15 @@ def main():
     midi.init()
 
     for m in range(midi.get_count()):
-        print(midi.get_device_info(m))
+        device = midi.get_device_info(m)
+        if device[1] == "AKM320 MIDI 1" and device[2] == 0:
+            devNum = m
 
     screen = pygame.display.set_mode((640, 480))
     pygame.display.set_caption("Piano Hero")
 
     clock = pygame.time.Clock()
-    inp = midi.Input(1)
+    inp = midi.Input(devNum)
 
     boxX = 300
     boxDir = 3
