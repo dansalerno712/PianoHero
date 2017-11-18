@@ -45,16 +45,15 @@ def main():
         if inp.poll():
             keys = inp.read(1000)
             keys = sorted(keys, key=getKeySorter)
+            print(keys)
             for key in keys:
-                key = key[0]
                 try:
-                    if key[0] == KEY_ON:
-                        pressedKeys.append(key[1])
-                    elif key[0] == KEY_OFF:
-                        pressedKeys.remove(key[1])
+                    if key[0][0] == KEY_ON:
+                        pressedKeys.append(key[0][1])
+                    elif key[0][0] == KEY_OFF:
+                        pressedKeys.remove(key[0][1])
                 except ValueError as e:
-                    keys.append(key)
-                    print("Error key: " + key)
+                    print("Error key: " + str(key[0][1]))
                 else:
                     pass
                 finally:
