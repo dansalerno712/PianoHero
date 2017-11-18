@@ -29,7 +29,7 @@ def main():
 
     pressedKeys = []
     while True:
-        clock.tick(30)
+        clock.tick(60)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -39,11 +39,13 @@ def main():
         screen.fill((0, 0, 0))
 
         if inp.poll():
-            key = inp.read(1)[0][0]
-            if key[0] == KEY_ON:
-                pressedKeys.append(key[1])
-            elif key[0] == KEY_OFF:
-                pressedKeys.remove(key[1])
+            keys = inp.read(1000)
+            for key in keys:
+                key = key[0]
+                if key[0] == KEY_ON:
+                    pressedKeys.append(key[1])
+                elif key[0] == KEY_OFF:
+                    pressedKeys.remove(key[1])
 
             print(pressedKeys)
 
