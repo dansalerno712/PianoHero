@@ -6,10 +6,15 @@ KEY_ON = 144
 KEY_OFF = 128
 
 
+def removeAll(myList, val):
+    return [value for value in myList if value != val]
+
+
 def getKeySorter(key):
     return key[1]
 
-def getKeySorter2(key):
+
+def getKeySorter1(key):
     if key[0][0] == KEY_ON:
         return 0
     else:
@@ -58,7 +63,7 @@ def main():
                     if key[0][0] == KEY_ON:
                         pressedKeys.append(key[0][1])
                     elif key[0][0] == KEY_OFF:
-                        pressedKeys.remove(key[0][1])
+                        pressedKeys.removeAll(pressedKeys, key[0][1])
                 except ValueError as e:
                     print("Error key: " + str(key[0][1]))
                 else:
