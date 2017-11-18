@@ -47,10 +47,18 @@ def main():
             keys = sorted(keys, key=getKeySorter)
             for key in keys:
                 key = key[0]
-                if key[0] == KEY_ON:
-                    pressedKeys.append(key[1])
-                elif key[0] == KEY_OFF:
-                    pressedKeys.remove(key[1])
+                try:
+                    if key[0] == KEY_ON:
+                        pressedKeys.append(key[1])
+                    elif key[0] == KEY_OFF:
+                        pressedKeys.remove(key[1])
+                except ValueError as e:
+                    keys.append(key)
+                    print("Error key: " + key)
+                else:
+                    pass
+                finally:
+                    pass
 
             print(pressedKeys)
 
