@@ -6,6 +6,10 @@ KEY_ON = 144
 KEY_OFF = 128
 
 
+def getKeySorter(key):
+    return key[1]
+
+
 def main():
     pygame.init()
     midi.init()
@@ -40,6 +44,7 @@ def main():
 
         if inp.poll():
             keys = inp.read(1000)
+            keys = sorted(keys, key=getKeySorter)
             for key in keys:
                 key = key[0]
                 if key[0] == KEY_ON:
@@ -48,7 +53,6 @@ def main():
                     pressedKeys.remove(key[1])
 
             print(pressedKeys)
-
 
         # boxX += boxDir
         # if boxX >= 620:
