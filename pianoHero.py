@@ -9,6 +9,12 @@ KEY_OFF = 128
 def getKeySorter(key):
     return key[1]
 
+def getKeySorter2(key):
+    if key[0][0] == KEY_ON:
+        return 0
+    else:
+        return 1
+
 
 def main():
     pygame.init()
@@ -45,6 +51,7 @@ def main():
         if inp.poll():
             keys = inp.read(1000)
             keys = sorted(keys, key=getKeySorter)
+            keys = sorted(keys, key=getKeySorter1)
             print(keys)
             for key in keys:
                 try:
