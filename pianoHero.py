@@ -28,6 +28,14 @@ keyColorMap = {
     NOTE_5: (255, 165, 0)
 }
 
+cheatMap = {
+    keyMap[NOTE_1]: 0,
+    keyMap[NOTE_2]: 0,
+    keyMap[NOTE_3]: 0,
+    keyMap[NOTE_4]: 0,
+    keyMap[NOTE_5]: 0
+}
+
 
 def removeAll(myList, val):
     return [value for value in myList if value != val]
@@ -42,6 +50,12 @@ def getKeySorter1(key):
         return 0
     else:
         return 1
+
+def hitNote():
+    print("hit note")
+
+def missNote():
+    print("missed note")
 
 
 def main():
@@ -103,6 +117,7 @@ def main():
                         pressedKeys.append(key[0][1])
                     elif key[0][0] == KEY_OFF:
                         pressedKeys = removeAll(pressedKeys, key[0][1])
+                        cheatMap[key[0][1]] = 0
                 except ValueError as e:
                     print("Error key: " + str(key[0][1]))
                 else:
@@ -129,14 +144,18 @@ def main():
 
                 if noteThatNeedsToBePressed in pressedKeys:
                     activeNotes.remove(note)
-                    print("hit note")
+                    cheatMap[noteThatNeedsToBePressed] += 1
+
+                    if cheatMap[noteThatNeedsToBePressed] >= 2:
+                        print("cheating")
+                    hitNote()
 
         # move notes down screen and remove them if they are missed
         for note in activeNotes:
             note.top += 3
             if note.top >= 480:
                 activeNotes.remove(note)
-                print("Note missed")
+                missNote()
             else:
                 pygame.draw.rect(screen, keyColorMap[note.left], note)
 
