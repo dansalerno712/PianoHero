@@ -1,6 +1,7 @@
 import pygame
 import pygame.midi as midi
 import sys
+import serial
 from random import *
 
 KEY_ON = 144
@@ -37,6 +38,9 @@ cheatMap = {
 }
 
 
+ser = serial.Serial('/dev/ttyACM0', 9600)
+
+
 def removeAll(myList, val):
     return [value for value in myList if value != val]
 
@@ -53,10 +57,11 @@ def getKeySorter1(key):
 
 def hitNote():
     print("hit note")
+    ser.write(b'1')
 
 def missNote():
     print("missed note")
-
+    ser.write(b'0')
 
 def main():
     pygame.init()
@@ -148,6 +153,7 @@ def main():
 
                     if cheatMap[noteThatNeedsToBePressed] >= 2:
                         print("cheating")
+                        ser.write(b'2')
                     hitNote()
 
         # move notes down screen and remove them if they are missed
