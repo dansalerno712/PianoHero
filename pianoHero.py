@@ -151,7 +151,7 @@ def main():
                     activeNotes.remove(note)
                     cheatMap[noteThatNeedsToBePressed] += 1
 
-                    if cheatMap[noteThatNeedsToBePressed] >= 2:
+                    if cheatMap[noteThatNeedsToBePressed] >= 3:
                         print("cheating")
                         ser.write(b'2')
                     hitNote()
